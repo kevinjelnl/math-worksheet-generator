@@ -13,7 +13,6 @@ from typing import List, Tuple
 
 QuestionInfo = Tuple[int, str, int, int]
 
-
 class MathWorksheetGenerator:
     """class for generating math worksheet of specified size and main_type"""
     def __init__(self, type_: str, max_number: int, question_count: int):
@@ -23,15 +22,15 @@ class MathWorksheetGenerator:
         self.pdf = FPDF()
 
         self.small_font_size = 10
-        self.middle_font_size = 15
-        self.large_font_size = 30
-        self.size = 21
-        self.tiny_pad_size = 2
-        self.pad_size = 10
-        self.large_pad_size = 30
+        self.middle_font_size = 10
+        self.large_font_size = 15
+        self.size = 10
+        self.tiny_pad_size = 10
+        self.pad_size = 7.5
+        self.large_pad_size = 5
         self.num_x_cell = 4
-        self.num_y_cell = 2
-        self.font_1 = 'Times'
+        self.num_y_cell = 6
+        self.font_1 = 'Helvetica'
         self.font_2 = 'Helvetica'
 
     # From https://stackoverflow.com/questions/6800193/what-is-the-most-efficient-way-of-finding-all-the-factors-of-a
@@ -99,7 +98,7 @@ class MathWorksheetGenerator:
         problems_per_page = self.split_arr(self.question_count, page_area)
         total_pages = len(problems_per_page)
         for page in range(total_pages):
-            self.pdf.add_page(orientation='L')
+            self.pdf.add_page(orientation='P')
             if problems_per_page[page] < self.num_x_cell:
                 self.print_question_row(data, page * page_area, problems_per_page[page])
             else:
@@ -121,7 +120,7 @@ class MathWorksheetGenerator:
 
     def print_top_row(self, question_num: str):
         """Helper function to print first character row of a question row"""
-        self.pdf.set_font(self.font_1, size=self.middle_font_size)
+        self.pdf.set_font(self.font_1, size=self.small_font_size)
         self.pdf.cell(self.pad_size, self.pad_size, txt=question_num, border='LT', align='C')
         self.pdf.cell(self.size, self.pad_size, border='T')
         self.pdf.cell(self.size, self.pad_size, border='T')

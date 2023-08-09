@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "math-worksheet-generator"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "math_worksheet_generator"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fpdf2 = "2.7.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
